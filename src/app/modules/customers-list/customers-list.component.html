@@ -1,0 +1,21 @@
+
+<table class="table mt-20 table-striped table-bordered">
+  <thead class="thead-light">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">State</th>
+      <th scope="col">Total Cases</th>
+      <th scope="col">Active Cases</th>
+      <th scope="col">Recovered</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let val of value">
+      <th scope="row">{{val.id}}</th>
+      <td>{{val.state}}</td>
+      <td>{{val.total_cases}}</td>
+      <td>{{val.active_cases}}</td>
+      <td>{{val.recovered}}</td>
+    </tr>
+  </tbody>
+</table>

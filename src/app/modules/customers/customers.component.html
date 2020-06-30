@@ -1,0 +1,96 @@
+<div class="row">
+  <div class="col-lg-6 col-md-6">
+    <h1>{{title}}</h1>
+    <div class="alert alert-danger" *ngIf="errorMsg">
+      {{errorMsg}}
+    </div>
+    <div class="alert alert-success" *ngIf="response && response.possibility">
+      {{response.possibility}}
+    </div>
+    <form #userForm="ngForm" *ngIf="!submitted" (ngSubmit)="onSubmit()" novalidate>
+      <div class="mb-3">
+        <label for="gender" class="label">Gender</label>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="gender" value="male" (ngModel)="userModel.gender">
+          <label class="form-check-label">Male</label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="gender" value="female" (ngModel)="userModel.gender">
+          <label class="form-check-label">Female</label>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="age" class="label">Age</label>
+        <input type="number" #age="ngModel" required class="form-control"
+          [class.is-invalid]="age.invalid && age.touched" name="age" (ngModel)="userModel.age">
+        <div *ngIf="age.errors && age.touched">
+          <small class="text-danger" *ngIf="age.errors.required">Age is required</small>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="physicalCondition" class="label">How do you feel physically right now?</label>
+        <select class="custom-select" (blur)="validateTopic(physicalCondition.value)"
+          (change)="validateTopic(physicalCondition.value)" #physicalCondition="ngModel"
+          [class.is-invalid]="physicalConditionHasValue && physicalCondition.touched" name="physicalCondition"
+          [(ngModel)]="userModel.physicalCondition">
+          <option *ngFor="let option of physicalConditionOptions">{{ option }}</option>
+        </select>
+        <small class="text-danger" [class.d-none]="!physicalConditionHasValue || physicalCondition.untouched">Please
+          choose
+          a option</small>
+      </div>
+
+      <div class="form-group">
+        <label for="closeContact" class="label">Do you have close contact with a COVID-19 patient in the last 14
+          days?</label>
+        <select class="custom-select" (blur)="validateContact(closeContact.value)"
+          (change)="validateContact(closeContact.value)" #closeContact="ngModel"
+          [class.is-invalid]="isCloseContact && closeContact.touched" name="closeContact"
+          [(ngModel)]="userModel.closeContact">
+          <option *ngFor="let option of booleanOptions">{{ option }}</option>
+        </select>
+        <small class="text-danger" [class.d-none]="!isCloseContact || closeContact.untouched">Please choose
+          a option</small>
+      </div>
+
+      <ul class="list-group pd-20 td-none">
+        <label for="symptoms" class="label">
+          Checkbox
+        </label>
+        <li *ngFor="let data of Data; let i=index">
+          <input type="checkbox" [value]="data.id" name="symptoms" required [(ngModel)]="data.isSelected"
+            (change)="isAllSelected()" />
+          {{data.name}}
+        </li>
+      </ul>
+      <button class="btn btn-primary" [disabled]="userForm.form.invalid || physicalConditionHasValue || isCloseContact"
+        type="submit">Submit</button>
+    </form>
+    <div *ngIf="submitted && response">
+      <div class="card">
+        <div class="card-header">Gender</div>
+        <div class="card-body font-weight-bold">{{response.gender}}</div>
+      </div>
+      <div class="card">
+        <div class="card-header">Age</div>
+        <div class="card-body font-weight-bold">{{response.age}}</div>
+      </div>
+      <div class="card">
+        <div class="card-header">How do you feel physically right now?</div>
+        <div class="card-body font-weight-bold">{{response.physical_condition}}</div>
+      </div>
+      <div class="card">
+        <div class="card-header">Do you have close contact with a COVID-19 patient in the last 14 days?</div>
+        <div class="card-body font-weight-bold">{{response.close_contact}}</div>
+      </div>
+      <div class="card">
+        <div class="card-header">Do you currently have any of these health conditions?</div>
+         <ul class=" card-body font-weight-bold list-group list-group-flush list-group-item td-none" *ngFor="let checkedListItem of response.symptoms">
+          <li *ngIf="checkedListItem">{{ checkedListItem }}</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

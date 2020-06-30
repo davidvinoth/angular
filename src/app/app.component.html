@@ -1,0 +1,18 @@
+<nav class="navbar navbar-expand-md navbar-light bg-light">
+  <a href="#" class="navbar-brand">
+    <img src="https://vfurnish-s3.s3.us-east-2.amazonaws.com/dev/assets/Product%20Images/logos/logo.png" height="50" alt="CoolBrand">
+  </a>
+  <div class="collapse navbar-collapse" id="navbarCollapse">
+    <div class="navbar-nav">
+        <a routerLink="/customers-list" class="nav-item nav-link active">List</a>
+        <a routerLink="/symptom-checker" class="nav-item nav-link">Symptom Checker</a>
+    </div>
+  </div>
+</nav>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>
