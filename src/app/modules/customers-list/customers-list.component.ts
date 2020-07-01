@@ -12,9 +12,9 @@ export class CustomersListComponent implements OnInit {
   }
 
   ngOnInit(){
-    // this.ApiServiceService.getUsers().subscribe((res) => {
-    //  this.value=res;
-    // });
+    this.ApiServiceService.getUsers().subscribe((res) => {
+     this.value=res;
+    });
   }
 
 
