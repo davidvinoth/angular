@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import { appConfig } from '../../../config';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiServiceService {
   // api: string = "https://jsonplaceholder.typicode.com/users";
-  api: string = "http://localhost:3000/state-wise-list";
+  api: string = appConfig.apiURL + "/state-wise-list";
 
   constructor(private http: HttpClient) { 
     console.log('list');

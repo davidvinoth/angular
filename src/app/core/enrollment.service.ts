@@ -5,6 +5,8 @@ import Dexie from 'dexie';
 import { catchError, mergeMap, concatMap } from 'rxjs/operators';
 import { throwError, forkJoin, Observable, of } from 'rxjs';
 import { OnlineofflineService } from './onlineoffline.service';
+import { appConfig } from '../../../config';
+
 
 
 @Injectable({
@@ -13,7 +15,8 @@ import { OnlineofflineService } from './onlineoffline.service';
 export class EnrollmentService {
 
   private db: any;
-  _url = 'http://localhost:3000/enroll';
+  //_url = 'http://localhost:3000/enroll';
+  _url = appConfig.apiURL + '/enroll';
   constructor(private _http: HttpClient, private onlineOfflineService: OnlineofflineService) {
     this.createDatabase();
     this.registerToEvents();
