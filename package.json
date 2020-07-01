@@ -9,10 +9,13 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "pwabuild": "ng build --prod --output-hashing=none",
-    "pwaprod": "npm run pwabuild && cd dist/pwa-forms && http-server -o"
+    "pwaprod": "npm run pwabuild && cd dist/pwa-forms && http-server -o",
+    "heroku-postbuild": "ng build --prod"
   },
   "private": true,
   "dependencies": {
+    "@angular/cli": "~9.1.7",
+    "@angular/compiler-cli": "~9.1.9",
     "@angular/animations": "~9.1.9",
     "@angular/common": "~9.1.9",
     "@angular/compiler": "~9.1.9",
@@ -50,5 +53,9 @@
     "ts-node": "~8.3.0",
     "tslint": "~6.1.0",
     "typescript": "~3.8.3"
+  },
+  "engines": {
+    "node": "12.14.1",
+    "npm": "6.13.4"
   }
 }
