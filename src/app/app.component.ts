@@ -15,7 +15,7 @@ export class AppComponent implements OnInit{
   title = 'Add Customer';
   errorMsg = '';
   displayToken: string;
-
+  collapsed: boolean = false;
   update: boolean = false;
 
   constructor(updates: SwUpdate,
@@ -49,7 +49,8 @@ export class AppComponent implements OnInit{
     }
 
     afMessaging.onMessage((payload) => {
-      console.log(payload)
+      console.log(payload);
+      alert(payload.notification.title + " " +payload.notification.body)
     })
   }
 
