@@ -2,11 +2,22 @@
   <a href="#" class="navbar-brand">
     <img src="https://vfurnish-s3.s3.us-east-2.amazonaws.com/dev/assets/Product%20Images/logos/logo.png" height="50" alt="CoolBrand">
   </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
   <div class="collapse navbar-collapse" id="navbarCollapse">
-    <div class="navbar-nav">
+    <!-- <div class="navbar-nav">
         <a routerLink="/customers-list" class="nav-item nav-link active">List</a>
         <a routerLink="/symptom-checker" class="nav-item nav-link">Symptom Checker</a>
-    </div>
+    </div> -->
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a routerLink="/customers-list" class="nav-item nav-link active">List</a>
+      </li>
+      <li class="nav-item">
+        <a routerLink="/symptom-checker" class="nav-item nav-link">Symptom Checker</a>
+      </li>
+    </ul>
   </div>
 </nav>
 <div class="container">

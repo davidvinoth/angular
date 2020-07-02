@@ -1,22 +1,29 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { SwUpdate, SwPush  } from '@angular/service-worker';
 import { TokenServiceService } from '../app/core/token-service.service';
+import { MessagingService } from '../app/core/messaging.service';
 import * as firebase from 'firebase/app';
 import 'firebase/messaging';
+import { AngularFireMessaging } from '@angular/fire/messaging';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit{
   title = 'Add Customer';
   errorMsg = '';
   displayToken: string;
 
   update: boolean = false;
 
-  constructor(updates: SwUpdate, push: SwPush,private tokenService: TokenServiceService ) {
+  constructor(updates: SwUpdate,
+     push: SwPush,
+     private tokenService: TokenServiceService,
+     private messagingService: MessagingService,
+     private afMessaging: AngularFireMessaging ) {
+       
     updates.available.subscribe(event => {
       if(confirm('New version available  ! would you like to update')){
         window.location.reload();
@@ -40,17 +47,25 @@ export class AppComponent {
       .then((registration) => firebase.messaging().useServiceWorker(registration));
       // navigator.serviceWorker.getRegistrations().then(function(registrations) { for(let registration of registrations) { registration.unregister() } })
     }
+
+    afMessaging.onMessage((payload) => {
+      console.log(payload)
+    })
   }
 
   ngOnInit(){
     this.tokenService.token.subscribe(token => this.displayToken = token);
-    this.permitToNotify();
+    //this.permitToNotify();
+
+    this.messagingService.requestPermission()
+    this.messagingService.receiveMessage()
   }
 
 
   updateToken(token){
     this.displayToken = token
     this.tokenService.nextMessage(token);
+    console.log("displayToken",this.displayToken)
   }
 
   permitToNotify() {
