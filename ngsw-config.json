@@ -35,7 +35,9 @@
       "urls":[
         "https://jsonplaceholder.typicode.com/users",
         "http://localhost:3000/enroll",
-        "http://localhost:3000/state-wise-list"
+        "http://localhost:3000/state-wise-list",
+        "https://pwa-server-notification.herokuapp.com/enroll",
+        "https://pwa-server-notification.herokuapp.com/state-wise-list"
       ],
       "cacheConfig": {
         "strategy":"freshness",
@@ -48,7 +50,9 @@
       "urls": [
         "https://jsonplaceholder.typicode.com/users",
         "http://localhost:3000/enroll",
-        "http://localhost:3000/state-wise-list"
+        "http://localhost:3000/state-wise-list",
+        "https://pwa-server-notification.herokuapp.com/enroll",
+        "https://pwa-server-notification.herokuapp.com/state-wise-list"
       ],
       "cacheConfig": {
         "strategy": "performance",
