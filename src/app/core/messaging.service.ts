@@ -16,15 +16,21 @@ export class MessagingService {
   currentMessage = new BehaviorSubject(null);
 
   requestPermission() {
-    this.angularFireMessaging.requestToken.subscribe(
-    (token) => {
-    console.log(token);
-    this.tokenService.nextMessage(token);
-    },
-    (err) => {
-    console.error('Unable to get permission to notify.', err);
-    }
-    );
+    this.angularFireMessaging.requestPermission.subscribe((data)=>{
+      console.log(data)
+      this.angularFireMessaging.requestToken.subscribe(
+        (token) => {
+        console.log(token);
+        this.tokenService.nextMessage(token);
+        },
+        (err) => {
+        console.error('Unable to get permission to notify.', err);
+        }
+        );
+    },(err)=>{
+      console.log("err",err)
+    })
+
   }
 
   receiveMessage() {
